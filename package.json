@@ -12,6 +12,8 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "git-commit-msg-linter": "^3.0.0"
+    "git-commit-msg-linter": "^3.0.0",
+    "husky": "^5.0.9",
+    "lint-staged": "^10.5.4"
   }
 }
