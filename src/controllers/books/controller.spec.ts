@@ -28,6 +28,6 @@ describe('Books Controller', () => {
         await controller.getBooksController(req, res, next)
 
         expect(res.status).toBeCalledWith(200)
-        expect(res.send).toBeCalled()
+        expect(res.json).toBeCalled()
     })
 })

@@ -4,6 +4,8 @@ import BookRepository from '../../repository/book-repository';
 export default class BookController {
     
     public async getBooksController(req: Request, res: Response, next: any): Promise<void> {
-        res.status(200).send(await new BookRepository().getBookList());
+        const books = await new BookRepository().getBookList()
+        res.header("Content-type", "application/json");
+        res.status(200).json(books);
     }
 }

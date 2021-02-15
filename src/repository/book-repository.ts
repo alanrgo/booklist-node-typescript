@@ -8,7 +8,7 @@ export class BookRepository {
 
     public async getBookList(): Promise<any> {
         const rawBooks = await this.poolDB.query("SELECT * FROM books");
-        return rawBooks;
+        return rawBooks.rows;
     }
 }
 
