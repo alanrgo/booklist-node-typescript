@@ -6,8 +6,8 @@ export class BookRepository {
     constructor(private poolDB: Pool = pool) {
     }
 
-    public getBookList(): any {
-        const rawBooks = this.poolDB.query("SELECT * FROM books");
+    public async getBookList(): Promise<any> {
+        const rawBooks = await this.poolDB.query("SELECT * FROM books");
         return rawBooks;
     }
 }
