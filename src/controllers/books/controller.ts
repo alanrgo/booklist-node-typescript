@@ -4,6 +4,6 @@ import BookRepository from '../../repository/book-repository';
 export default class BookController {
     
     public getBooksController(req: Request, res: Response, next: any): void {
-        return new BookRepository().getBookList();
+        res.status(200).send(new BookRepository().getBookList());
     }
 }
