@@ -1,5 +1,6 @@
 import {Request, Response} from 'express';
 import BookRepository from '../../repository/book-repository';
+import { BookParams } from './interfaces/book-params';
 
 export default class BookController {
     
@@ -12,7 +13,7 @@ export default class BookController {
     public async addBookController(req: Request, res: Response, next: any) {
         const { title } = req.body
         const { description } = req.body
-        const bookData = { title, description}
+        const bookData: BookParams = { title, description }
         
         const addedBook = await new BookRepository().addBook(bookData)
         res.header("Content-type", "application/json");
