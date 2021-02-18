@@ -13,7 +13,12 @@ export class BookRepository {
     }
 
     public async addBook(bookData: BookParams): Promise<Book> {
-        return {id: -1, ...bookData};
+        const query = {
+            text: "INSERT INTO books(title, description) VALUES($1, $2) RETURNING id", 
+            values: [bookData.title, bookData.description]
+        }
+        const result = await this.poolDB.query(query);
+        return {...bookData, id: result.rows[0].id}
     } 
 }
 
