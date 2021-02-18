@@ -18,67 +18,73 @@ describe('Books Controller', () => {
         jest.clearAllMocks();
     });
 
-    it('should call the correct repository function when calling getBooksController', () => {
-        const controller = new BookController();
-        const req = mockRequest()
-        const res = mockResponse()
-        const next = {}
-        controller.getBooksController(req, res, next)
+    describe('getBooksController', () => {
 
-        expect(mockGetBookList).toBeCalledTimes(1)
+        it('should call the correct repository function when calling getBooksController', () => {
+            const controller = new BookController();
+            const req = mockRequest()
+            const res = mockResponse()
+            const next = {}
+            controller.getBooksController(req, res, next)
+    
+            expect(mockGetBookList).toBeCalledTimes(1)
+        })
+    
+        it('should send json payload to client', async () => {
+            const controller = new BookController();
+            const req = mockRequest()
+            const res = mockResponse()
+            const next = {}
+            await controller.getBooksController(req, res, next)
+    
+            expect(res.status).toBeCalledWith(200)
+            expect(res.json).toBeCalled()
+        })
     })
 
-    it('should send json payload to client', async () => {
-        const controller = new BookController();
-        const req = mockRequest()
-        const res = mockResponse()
-        const next = {}
-        await controller.getBooksController(req, res, next)
-
-        expect(res.status).toBeCalledWith(200)
-        expect(res.json).toBeCalled()
-    })
-
-    it('should send json payload to client when calling addBookController', async () => {
-        const controller = new BookController();
-        const bookData = {
-            title: "title",
-            description: "description"
-        }
-        const req = mockRequest({ body: bookData })
-        const res = mockResponse()
-        const next = {}
-
-        const expected = {...bookData, id: 3}
-        mockAddBook.mockResolvedValue(expected)
-
-        await controller.addBookController(req, res, next)
-
-        expect(res.status).toBeCalledWith(200)
-        expect(res.json).toBeCalledWith(expected)
-    })
-
-    it('should call the correct repository function when calling addBookController', () => {
-        const controller = new BookController();
-        const req = mockRequest()
-        const res = mockResponse()
-        const next = {}
-        controller.addBookController(req, res, next)
-
-        expect(mockAddBook).toBeCalledTimes(1)
-    })
-
-    it('should call the repository function with the book data sent on request', () => {
-        const controller = new BookController();
-        const bookData = {
-            title: "title",
-            description: "description"
-        }
-        const req = mockRequest({ body: bookData })
-        const res = mockResponse()
-        const next = {}
-        controller.addBookController(req, res, next)
-
-        expect(mockAddBook).toBeCalledWith(bookData)
+    
+    describe('addBookController', () => {
+        it('should send json payload to client when calling addBookController', async () => {
+            const controller = new BookController();
+            const bookData = {
+                title: "title",
+                description: "description"
+            }
+            const req = mockRequest({ body: bookData })
+            const res = mockResponse()
+            const next = {}
+    
+            const expected = {...bookData, id: 3}
+            mockAddBook.mockResolvedValue(expected)
+    
+            await controller.addBookController(req, res, next)
+    
+            expect(res.status).toBeCalledWith(200)
+            expect(res.json).toBeCalledWith(expected)
+        })
+    
+        it('should call the correct repository function when calling addBookController', () => {
+            const controller = new BookController();
+            const req = mockRequest()
+            const res = mockResponse()
+            const next = {}
+            controller.addBookController(req, res, next)
+    
+            expect(mockAddBook).toBeCalledTimes(1)
+        })
+    
+        it('should call the repository function with the book data sent on request', () => {
+            const controller = new BookController();
+            const bookData = {
+                title: "title",
+                description: "description"
+            }
+            const req = mockRequest({ body: bookData })
+            const res = mockResponse()
+            const next = {}
+            controller.addBookController(req, res, next)
+    
+            expect(mockAddBook).toBeCalledWith(bookData)
+        })
     })
 })
