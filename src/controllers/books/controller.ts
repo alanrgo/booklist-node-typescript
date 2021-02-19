@@ -31,4 +31,13 @@ export default class BookController {
         res.header("Content-type", "application/json");
         res.sendStatus(200);
     }
+
+    public async deleteBookController(req: Request, res: Response, next: any): Promise<void> {
+        const { id } = req.body;
+
+        await new BookRepository().deleteBook(id);
+        res.header("Content-type", "application/json");
+        res.sendStatus(200);
+    }
+    
 }

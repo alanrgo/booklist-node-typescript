@@ -5,12 +5,14 @@ import { Book } from "../../models/Book";
 const mockGetBookList = jest.fn()
 const mockAddBook = jest.fn()
 const mockUpdateBook = jest.fn()
+const mockDeleteBook = jest.fn()
 jest.mock('../../repository/book-repository', () => {
     return jest.fn().mockImplementation(() => {
         return {
             getBookList: mockGetBookList,
             addBook: mockAddBook,
-            updateBook: mockUpdateBook
+            updateBook: mockUpdateBook,
+            deleteBook: mockDeleteBook
         }
     })
 })
@@ -115,6 +117,31 @@ describe('Books Controller', () => {
             const res = mockResponse()
             const next = {}
             await controller.updateBookController(req, res, next)
+    
+            expect(res.sendStatus).toBeCalledWith(200)
+        })
+    })
+
+    describe('deleteBookController', () => {
+
+        it('should call the correct repository function when calling updateBookController', () => {
+            const controller = new BookController();
+            const bookId = 1
+            const req = mockRequest({body: {id: bookId}})
+            const res = mockResponse()
+            const next = {}
+            controller.deleteBookController(req, res, next)
+    
+            expect(mockDeleteBook).toBeCalledTimes(1)
+            expect(mockDeleteBook).toBeCalledWith(bookId)
+        })
+    
+        it('should send json payload to client', async () => {
+            const controller = new BookController();
+            const req = mockRequest()
+            const res = mockResponse()
+            const next = {}
+            await controller.deleteBookController(req, res, next)
     
             expect(res.sendStatus).toBeCalledWith(200)
         })
