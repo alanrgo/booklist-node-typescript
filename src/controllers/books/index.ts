@@ -8,7 +8,7 @@ router.get("/", async (req, res, next) => {
     controller.getBooksController(req, res, next);
 });
 
-router.post("/add", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
     controller.addBookController(req, res, next);
 });
 
