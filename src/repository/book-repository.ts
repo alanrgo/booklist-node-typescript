@@ -4,6 +4,7 @@ import pool from "../database/db";
 import { Book } from "../models/Book";
 
 export class BookRepository {
+    
     constructor(private poolDB: Pool = pool) {
     }
 
@@ -20,6 +21,14 @@ export class BookRepository {
         const result = await this.poolDB.query(query);
         return {...bookData, id: result.rows[0].id}
     } 
+
+    public async updateBook(bookParams: Book): Promise<void> {
+        let query = {
+            text: "UPDATE books SET title = $1, description $2 WHERE id = $3",
+            values: [bookParams.title, bookParams.description, bookParams.id]
+        }
+        await this.poolDB.query(query);
+    }
 }
 
 export default BookRepository;

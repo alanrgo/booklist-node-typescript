@@ -1,6 +1,7 @@
 import BookRepository from "./book-repository";
 import pool from "../database/db";
 import { BookParams } from "../controllers/books/interfaces/book-params";
+import { Book } from "../models/Book";
 
 jest.mock('../database/db', () => {
     return {
@@ -46,5 +47,22 @@ describe('Book Repository', () => {
         expect(queryMethod).toBeCalledTimes(1);
         expect(queryMethod).toBeCalledWith(query);
         expect(actual).toEqual(expected);
+    })
+
+    it('should call data base with the correct query for updating a book in db', async () =>  {
+        let bookRepository = new BookRepository()
+        let bookParams: Book = {
+            id: 1,
+            title: "title",
+            description: "description"
+        }
+        let query = {
+            text: "UPDATE books SET title = $1, description $2 WHERE id = $3",
+            values: [bookParams.title, bookParams.description, bookParams.id]
+        }
+
+        const actual = await bookRepository.updateBook(bookParams);
+        expect(pool.query).toBeCalledTimes(1);
+        expect(pool.query).toBeCalledWith(query);
     })
 })
