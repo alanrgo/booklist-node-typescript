@@ -23,9 +23,17 @@ export class BookRepository {
     } 
 
     public async updateBook(bookParams: Book): Promise<void> {
-        let query = {
+        const query = {
             text: "UPDATE books SET title = $1, description $2 WHERE id = $3",
             values: [bookParams.title, bookParams.description, bookParams.id]
+        }
+        await this.poolDB.query(query);
+    }
+
+    public async deleteBook(bookId: number): Promise<void> {
+        const query = {
+            text: "DELETE FROM books WHERE id = $1",
+            values: [bookId]
         }
         await this.poolDB.query(query);
     }

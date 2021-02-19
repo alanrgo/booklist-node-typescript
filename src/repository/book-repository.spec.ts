@@ -65,4 +65,17 @@ describe('Book Repository', () => {
         expect(pool.query).toBeCalledTimes(1);
         expect(pool.query).toBeCalledWith(query);
     })
+
+    it('should call data base with the correct query for deleting a book in db', async () =>  {
+        let bookRepository = new BookRepository()
+        let bookId: number = 1
+        let query = {
+            text: "DELETE FROM books WHERE id = $1",
+            values: [bookId]
+        }
+
+        await bookRepository.deleteBook(bookId);
+        expect(pool.query).toBeCalledTimes(1);
+        expect(pool.query).toBeCalledWith(query);
+    })
 })
