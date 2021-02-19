@@ -16,4 +16,8 @@ router.put("/", async (req, res, next) => {
     controller.addBookController(req, res, next);
 });
 
+router.delete("/", async (req, res, next) => {
+    controller.deleteBookController(req, res, next);
+});
+
 export default router;
