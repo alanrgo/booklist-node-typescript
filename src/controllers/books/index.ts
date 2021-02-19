@@ -12,4 +12,8 @@ router.post("/add", async (req, res, next) => {
     controller.addBookController(req, res, next);
 });
 
+router.put("/", async (req, res, next) => {
+    controller.addBookController(req, res, next);
+});
+
 export default router;
