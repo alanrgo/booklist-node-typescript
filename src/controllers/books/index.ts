@@ -13,7 +13,7 @@ router.post("/", async (req, res, next) => {
 });
 
 router.put("/", async (req, res, next) => {
-    controller.addBookController(req, res, next);
+    controller.updateBookController(req, res, next);
 });
 
 router.delete("/", async (req, res, next) => {

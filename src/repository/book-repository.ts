@@ -24,7 +24,7 @@ export class BookRepository {
 
     public async updateBook(bookParams: Book): Promise<void> {
         const query = {
-            text: "UPDATE books SET title = $1, description $2 WHERE id = $3",
+            text: "UPDATE books SET title = $1, description = $2 WHERE id = $3",
             values: [bookParams.title, bookParams.description, bookParams.id]
         }
         await this.poolDB.query(query);

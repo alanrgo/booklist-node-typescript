@@ -57,7 +57,7 @@ describe('Book Repository', () => {
             description: "description"
         }
         let query = {
-            text: "UPDATE books SET title = $1, description $2 WHERE id = $3",
+            text: "UPDATE books SET title = $1, description = $2 WHERE id = $3",
             values: [bookParams.title, bookParams.description, bookParams.id]
         }
 
