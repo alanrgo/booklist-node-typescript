@@ -29,7 +29,7 @@ export default class BookController {
         const book: Book = {title, description, id}
         await new BookRepository().updateBook(book);
         res.header("Content-type", "application/json");
-        res.sendStatus(200);
+        res.status(200).json({});
     }
 
     public async deleteBookController(req: Request, res: Response, next: any): Promise<void> {
@@ -37,7 +37,7 @@ export default class BookController {
 
         await new BookRepository().deleteBook(id);
         res.header("Content-type", "application/json");
-        res.sendStatus(200);
+        res.status(200).json({});
     }
     
 }

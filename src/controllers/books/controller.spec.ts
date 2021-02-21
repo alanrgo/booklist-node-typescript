@@ -118,7 +118,8 @@ describe('Books Controller', () => {
             const next = {}
             await controller.updateBookController(req, res, next)
     
-            expect(res.sendStatus).toBeCalledWith(200)
+            expect(res.status).toBeCalledWith(200)
+            expect(res.json).toBeCalledWith({})
         })
     })
 
@@ -143,7 +144,8 @@ describe('Books Controller', () => {
             const next = {}
             await controller.deleteBookController(req, res, next)
     
-            expect(res.sendStatus).toBeCalledWith(200)
+            expect(res.status).toBeCalledWith(200)
+            expect(res.json).toBeCalledWith({})
         })
     })
 })
