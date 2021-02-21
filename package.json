@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc --project ./",
     "create-deps": "createdb book_list_database",
-    "migrate": "node-pg-migrate",
+    "migrate": "DATABASE_URL=postgresql://postgres@localhost/book_db node-pg-migrate",
     "start": "nodemon src/index.ts",
     "test": "jest"
   },
